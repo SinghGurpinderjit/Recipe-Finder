@@ -20,5 +20,17 @@
   "dependencies": {
     "@gurpinderjitsingh/recipe-ui": "^0.2.1"
   },
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.cjs.js"
+    },
+    "./components": {
+      "types": "./dist/types/components/index.d.ts",
+      "import": "./dist/components/index.js",
+      "default": "./dist/components/index.js"
+    }
+  },
   "type": "module"
 }
