@@ -1,0 +1,38 @@
+{
+  "name": "@gurpinderjitsingh/recipe-ui",
+  "version": "0.2.1",
+  "description": "Reusable web component library for the Recipe Finder & Meal Planner app, built with StencilJS.",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.js",
+  "es2015": "dist/esm/index.mjs",
+  "types": "dist/types/index.d.ts",
+  "collection": "dist/collection/collection-manifest.json",
+  "collection:main": "dist/collection/index.js",
+  "unpkg": "dist/recipe-ui/recipe-ui.esm.js",
+  "files": [
+    "dist/",
+    "loader/"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "stencil build --docs",
+    "start": "stencil build --dev --watch --serve",
+    "test": "stencil test --spec --e2e",
+    "test.watch": "stencil test --spec --e2e --watchAll",
+    "generate": "stencil generate"
+  },
+  "dependencies": {
+    "@stencil/core": "^4.20.0"
+  },
+  "devDependencies": {
+    "@stencil/core": "^4.20.0",
+    "typescript": "^5.5.0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SinghGurpinderjit/recipe-finder"
+  }
+}

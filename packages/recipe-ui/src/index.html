@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>recipe-ui component playground</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+  <link href="/build/recipe-ui.css" rel="stylesheet" />
+  <script type="module" src="/build/recipe-ui.esm.js"></script>
+  <script nomodule src="/build/recipe-ui.js"></script>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      margin: 0;
+      background: #f9fafb;
+      color: #111827;
+    }
+
+    header {
+      background: #1f2937;
+      color: white;
+      padding: 1rem 1.5rem;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+
+    section {
+      margin-bottom: 2.5rem;
+    }
+
+    section h2 {
+      border-bottom: 2px solid #e5e7eb;
+      padding-bottom: 0.4rem;
+    }
+
+    .row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+
+    .log {
+      background: #111827;
+      color: #4ade80;
+      font-family: monospace;
+      font-size: 0.85rem;
+      padding: 0.75rem;
+      border-radius: 6px;
+      max-height: 160px;
+      overflow-y: auto;
+      margin-top: 0.5rem;
+    }
+
+    .card-slot {
+      width: 260px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>recipe-ui — local component playground</h1>
+  </header>
+  <main>
+
+    <section>
+      <h2>recipe-card</h2>
+      <div class="row">
+        <div class="card-slot">
+          <recipe-card recipe-title="Spaghetti Carbonara"
+            image="https://www.themealdb.com/images/media/meals/llcbn01574260722.jpg" category="Pasta">
+            <span slot="actions">Italian</span>
+          </recipe-card>
+        </div>
+      </div>
+      <div id="card-log" class="log">Click the card or the ☆ button — events log here…</div>
+    </section>
+
+    <section>
+      <h2>recipe-search-bar</h2>
+      <recipe-search-bar placeholder="Search recipes..."></recipe-search-bar>
+      <div id="search-log" class="log">Type + submit — search event logs here…</div>
+    </section>
+
+    <section>
+      <h2>recipe-filter-bar</h2>
+      <recipe-filter-bar id="filter-demo"></recipe-filter-bar>
+      <div id="filter-log" class="log">Click a category chip — filterChange event logs here…</div>
+    </section>
+
+    <section>
+      <h2>recipe-rating</h2>
+      <recipe-rating value="3"></recipe-rating>
+      <div id="rating-log" class="log">Click a star — ratingChange event logs here…</div>
+    </section>
+
+    <section>
+      <h2>recipe-form</h2>
+      <recipe-form initialData={}>
+        <h3 slot="header">Add a Recipe (playground)</h3>
+      </recipe-form>
+      <div id="form-log" class="log">Fill in + Save (or Cancel) — event logs here…</div>
+    </section>
+
+    <section>
+      <h2>meal-plan-day</h2>
+      <div style="max-width: 260px;">
+        <meal-plan-day id="day-demo" day="Mon"></meal-plan-day>
+      </div>
+      <div id="day-log" class="log">Click "+ Add" or remove a meal — events log here…</div>
+    </section>
+
+    <section>
+      <h2>app-modal</h2>
+      <button id="open-modal-btn">Open modal</button>
+      <app-modal id="modal-demo" modal-title="Example Modal">
+        <button type="button" id="button2">
+          Click me
+        </button>
+      </app-modal>
+      <div id="modal-log" class="log">Open/close the modal — close event logs here…</div>
+    </section>
+
+    <section>
+      <h2>app-toast</h2>
+      <button id="fire-toast-btn">Fire a toast</button>
+      <div id="toast-log" class="log">Toast dismiss events log here…</div>
+      <div id="toast-container" style="margin-top: 0.75rem;"></div>
+    </section>
+
+  </main>
+
+  <script>
+    function log(elId, msg) {
+      const el = document.getElementById(elId);
+      const line = document.createElement('div');
+      line.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+      el.prepend(line);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const card = document.querySelector('recipe-card');
+      card.addEventListener('cardClick', () => log('card-log', 'cardClick fired'));
+      card.addEventListener('favoriteToggle', (e) => log('card-log', `favoriteToggle: ${JSON.stringify(e.detail)}`));
+
+      const search = document.querySelector('recipe-search-bar');
+      search.addEventListener('search', (e) => log('search-log', `search: ${JSON.stringify(e.detail)}`));
+
+      const filterBar = document.getElementById('filter-demo');
+      filterBar.categories = ['Pasta', 'Dessert', 'Vegan', 'Seafood'];
+      filterBar.addEventListener('filterChange', (e) => log('filter-log', `filterChange: ${JSON.stringify(e.detail)}`));
+
+      const rating = document.querySelector('recipe-rating');
+      rating.addEventListener('ratingChange', (e) => log('rating-log', `ratingChange: ${JSON.stringify(e.detail)}`));
+
+      const form = document.querySelector('recipe-form');
+      form.addEventListener('save', (e) => log('form-log', `save: ${JSON.stringify(e.detail)}`));
+      form.addEventListener('cancel', () => log('form-log', 'cancel fired'));
+
+      const day = document.getElementById('day-demo');
+      day.meals = [{ id: 'm1', title: 'Pancakes', image: 'https://www.themealdb.com/images/media/meals/rwuyqx1511383174.jpg' }];
+      day.addEventListener('assignMeal', (e) => log('day-log', `assignMeal: ${JSON.stringify(e.detail)}`));
+      day.addEventListener('removeMeal', (e) => log('day-log', `removeMeal: ${JSON.stringify(e.detail)}`));
+
+      const modal = document.getElementById('modal-demo');
+      document.getElementById('open-modal-btn').addEventListener('click', () => (modal.open = true));
+      modal.addEventListener('close', () => {
+        modal.open = false;
+        log('modal-log', 'close fired');
+      });
+
+      document.getElementById('button2').addEventListener('click', () => {
+        console.log("SLOT BUTTON CLICKED");
+      });
+      document.getElementById('fire-toast-btn').addEventListener('click', () => {
+        const toast = document.createElement('app-toast');
+        toast.message = 'This is a sample toast';
+        toast.type = 'success';
+        toast.addEventListener('dismiss', () => {
+          log('toast-log', 'dismiss fired');
+          toast.remove();
+        });
+        document.getElementById('toast-container').appendChild(toast);
+      });
+    });
+  </script>
+</body>
+
+</html>

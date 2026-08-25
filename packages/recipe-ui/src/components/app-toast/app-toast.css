@@ -1,0 +1,9 @@
+:host { font-family: system-ui, sans-serif; display: block; }
+.toast {
+  display: flex; align-items: center; gap: 10px; padding: 10px 16px;
+  border-radius: 8px; color: #fff; font-size: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.toast.success { background: #2ecc71; }
+.toast.error { background: #e74c3c; }
+.toast.info { background: #3498db; }
+button { border: none; background: none; color: inherit; cursor: pointer; margin-left: auto; }

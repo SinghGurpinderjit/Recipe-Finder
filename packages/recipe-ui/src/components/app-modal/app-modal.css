@@ -1,0 +1,12 @@
+:host { font-family: system-ui, sans-serif; }
+.overlay {
+  position: fixed; inset: 0; background: rgba(0, 0, 0, 0.45);
+  display: flex; align-items: center; justify-content: center; z-index: 1000;
+}
+.dialog {
+  background: #fff; border-radius: 12px; min-width: 320px; max-width: 90vw;
+  max-height: 85vh; overflow-y: auto; padding: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+.header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.header h2 { margin: 0; font-size: 18px; }
+.close-btn { border: none; background: none; font-size: 16px; cursor: pointer; color: #666; }

@@ -1,0 +1,11 @@
+:host { display: block; font-family: system-ui, sans-serif; }
+.wrap { display: flex; gap: 6px; }
+input {
+  flex: 1; padding: 10px 14px; border-radius: 8px;
+  border: 1px solid #ddd; font-size: 14px; outline: none;
+}
+input:focus { border-color: #ff6b35; }
+button {
+  border: none; background: #ff6b35; color: #fff; border-radius: 8px;
+  padding: 0 16px; cursor: pointer; font-size: 15px;
+}
