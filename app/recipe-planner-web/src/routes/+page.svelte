@@ -1,41 +1,15 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { goto } from "$app/navigation";
-  // import { searchRecipes, filterByCategory, listCategories, browseRandomSelection } from '$lib/api/mealdb';
   import { recipes } from "$lib/state/recipes.svelte";
   import { favorites } from "$lib/state/favorites.svelte";
   import { toasts } from "$lib/state/toast.svelte";
-  // import { userRecipes } from '$lib/state/userRecipes.svelte';
   import type { Recipe } from "$lib/types";
 
-  // let results = $state<Recipe[]>([]);
-  // let categories = $state<string[]>([]);
   let activeCategory = $state("");
-  // let loading = $state(true);
   let query = $state("");
   const PAGE_SIZE = 8;
   let currentPage = $state(1);
-
-  // onMount(async () => {
-  //   categories = await listCategories();
-  //   results = await browseRandomSelection();
-  //   loading = false;
-  // });
-
-  // async function runSearch() {
-  //   loading = true;
-  //   activeCategory = '';
-  //   results = await searchRecipes(query);
-  //   loading = false;
-  // }
-
-  // async function onFilterChange(e: CustomEvent<{ value: string }>) {
-  //   loading = true;
-  //   activeCategory = e.detail.value;
-  //   query = '';
-  //   results = activeCategory ? await filterByCategory(activeCategory) : await browseRandomSelection();
-  //   loading = false;
-  // }
 
   function onFilterChange(e: CustomEvent<{ value: string }>) {
     activeCategory = e.detail.value;
@@ -56,7 +30,6 @@
     );
   }
 
-  // combine API results with any matching user-created recipes when searching
   let combined = $derived(
     query.trim()
       ? recipes.search(query)
@@ -70,9 +43,6 @@
     combined.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE),
   );
 
-  // reset to page 1 whenever the underlying result set changes (new search,
-  // new filter, or a recipe was added/removed) rather than leaving the user
-  // stranded on a page that may no longer exist
   $effect(() => {
     combined;
     currentPage = 1;
