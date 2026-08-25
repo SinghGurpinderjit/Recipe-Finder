@@ -1,0 +1,5 @@
+:host { display: inline-block; font-family: system-ui, sans-serif; }
+.wrap { display: flex; gap: 2px; }
+.star { font-size: 18px; color: #ddd; }
+.star.filled { color: #f5a623; }
+.star.clickable { cursor: pointer; }

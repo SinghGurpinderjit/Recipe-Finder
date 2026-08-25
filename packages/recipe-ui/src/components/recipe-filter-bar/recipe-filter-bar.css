@@ -1,0 +1,7 @@
+:host { display: block; font-family: system-ui, sans-serif; }
+.wrap { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  border: 1px solid #ddd; background: #fff; border-radius: 999px;
+  padding: 6px 14px; font-size: 13px; cursor: pointer; color: #444;
+}
+.chip.active { background: #ff6b35; border-color: #ff6b35; color: #fff; }
