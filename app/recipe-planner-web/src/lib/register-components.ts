@@ -3,6 +3,6 @@
 // don't exist during SvelteKit's SSR pass), so it's called from +layout.svelte
 // inside onMount.
 export async function registerComponents() {
-  const { defineCustomElements } = await import('@gurpinderjitsingh/recipe-ui/loader');
-  await defineCustomElements();
+  await import('@gurpinderjitsingh/recipe-ui/dist/components');
+  // await defineCustomElements();
 }
