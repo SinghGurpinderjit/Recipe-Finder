@@ -42,7 +42,7 @@ export const mealPlan = {
     const dayPlan = state.plan[day] ?? emptyDayPlan();
     const current = dayPlan[mealTime] ?? [];
     // avoid duplicate assignment of the same recipe in the same slot
-    if (current.some((m) => m.id === entry.id)) return;
+    if (current.some((m) => m.recipeId === entry.recipeId)) return;
     state.plan = {
       ...state.plan,
       [day]: { ...dayPlan, [mealTime]: [...current, entry] },
@@ -54,9 +54,9 @@ export const mealPlan = {
       Object.entries(state.plan).map(([day, meals]) => [
         day,
         {
-          Breakfast: meals.Breakfast.filter(x => x.id !== recipeId),
-          Lunch: meals.Lunch.filter(x => x.id !== recipeId),
-          Dinner: meals.Dinner.filter(x => x.id !== recipeId)
+          Breakfast: meals.Breakfast.filter(x => x.recipeId !== recipeId),
+          Lunch: meals.Lunch.filter(x => x.recipeId !== recipeId),
+          Dinner: meals.Dinner.filter(x => x.recipeId !== recipeId)
         }
       ])
     );
@@ -66,7 +66,7 @@ export const mealPlan = {
     const current = dayPlan[mealTime] ?? [];
     state.plan = {
       ...state.plan,
-      [day]: { ...dayPlan, [mealTime]: current.filter((m) => m.id !== mealId) },
+      [day]: { ...dayPlan, [mealTime]: current.filter((m) => m.recipeId !== mealId) },
     };
     persist();
   },
