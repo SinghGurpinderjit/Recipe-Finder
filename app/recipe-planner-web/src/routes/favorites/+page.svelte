@@ -25,6 +25,7 @@
         recipe-title={r.title}
         image={r.image}
         category={r.category}
+        cuisine={r.cuisine}
         favorite={true}
         oncardClick={() => goto(`/recipe/${r.id}`)}
         onfavoriteToggle={() => remove(r)}
