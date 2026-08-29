@@ -11,9 +11,12 @@
   let ready = $state(false);
   let mobileMenuOpen = $state(false);
 
-  const mealPlanCount = $derived(Object.values(mealPlan.plan).filter(
-      (x) => x.Breakfast.length > 0 || x.Lunch.length > 0 || x.Dinner.length > 0
-    ).length);
+  const mealPlanCount = $derived(
+    Object.values(mealPlan.plan).filter(
+      (x) =>
+        x.Breakfast.length > 0 || x.Lunch.length > 0 || x.Dinner.length > 0,
+    ).length
+  );
 
   onMount(async () => {
     await registerComponents();
@@ -171,7 +174,6 @@
   .nav-links a {
     color: #e5e7eb;
     text-decoration: none;
-    margin-left: 1.25rem;
     font-size: 0.95rem;
   }
   .nav-links a:hover {
@@ -221,6 +223,9 @@
       display: flex;
     }
 
+    .nav {
+      display: block;
+    }
     .nav-links {
       display: none;
       flex-direction: column;
@@ -231,10 +236,10 @@
     .nav-links.open {
       display: flex;
     }
-    .nav-links a,
     .nav-links a {
       padding: 0.4rem 0;
       font-size: 1rem;
+      margin-left: 0rem;
     }
   }
   .badge-count {
