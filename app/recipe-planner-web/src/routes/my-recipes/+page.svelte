@@ -49,6 +49,7 @@
         recipe-title={r.title}
         image={r.image}
         category={r.category}
+        cuisine={r.cuisine}
         favorite={favorites.isFavorite(r.id)}
         oncardClick={() => openRecipe(r.id)}
         onfavoriteToggle={() => onFavoriteToggle(r)}
@@ -74,7 +75,7 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 0.5rem;
-    
+
     .btn {
       background: rgb(255, 107, 53);
       color: rgb(255, 255, 255);
