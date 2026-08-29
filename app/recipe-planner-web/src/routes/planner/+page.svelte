@@ -1,23 +1,20 @@
 <script lang="ts">
   import { mealPlan } from "$lib/state/mealPlan.svelte";
-  import { favorites } from "$lib/state/favorites.svelte";
-  import { userRecipes } from "$lib/state/userRecipes.svelte";
   import { toasts } from "$lib/state/toast.svelte";
   import { WEEK_DAYS, MEAL_TIMES, type MealTime } from "$lib/types";
+  import { recipes } from "$lib/state/recipes.svelte";
 
   let showPicker = $state(false);
   let pickerDay = $state<string>("");
   let pickerMealTime = $state<MealTime>("Breakfast");
+  let query = $state<string>("");
 
-  // recipes available to pick from: favorites + user-created ones
-  let pickable = $derived(
-    [...favorites.items, ...userRecipes.items].filter(
-      (r, i, arr) => arr.findIndex((x) => x.id === r.id) === i,
-    ),
-  );
+  // all recipes available to pick from
+  let pickable = $derived(recipes.filter(query, "", ""));
 
   function openPicker(day: string, mealTime: MealTime) {
     pickerDay = day;
+    query = "";
     pickerMealTime = mealTime;
     showPicker = true;
   }
@@ -26,7 +23,7 @@
     const recipe = pickable.find((r) => r.id === recipeId);
     if (!recipe) return;
     mealPlan.assign(pickerDay, pickerMealTime, {
-      id: recipe.id,
+      recipeId: recipe.id,
       title: recipe.title,
       image: recipe.image,
     });
@@ -79,25 +76,6 @@
 
   function formatDate(d: Date): string {
     return d.toLocaleDateString(undefined, { month: "short", day: "numeric" });
-  }
-
-  const MEAL_ICONS: Record<MealTime, string> = {
-    Breakfast: "🌅",
-    Lunch: "☀️",
-    Dinner: "🌙",
-  };
-  function clickable(node: HTMLElement, callback: () => void) {
-    node.addEventListener("click", callback);
-
-    return {
-      update(callback: () => void) {
-        node.removeEventListener("click", callback);
-        node.addEventListener("click", callback);
-      },
-      destroy() {
-        node.removeEventListener("click", callback);
-      },
-    };
   }
 
   export function onNativeClick(
@@ -165,6 +143,17 @@
   modal-title={`Add ${pickerMealTime} for ${pickerDay}`}
   onclose={() => (showPicker = false)}
 >
+  <br />
+  <recipe-search-bar
+    placeholder="Search by Recipe Name"
+    value={query}
+    onsearch={(e: CustomEvent<{ value: string }>) => {
+      query = e.detail.value;
+    }}
+  ></recipe-search-bar>
+
+  <br />
+
   {#if pickable.length === 0}
     <p class="empty-state">
       No recipes to choose from yet. Add some favorites or create your own
@@ -291,5 +280,36 @@
     .week {
       grid-template-columns: auto auto;
     }
+  }
+
+  .cuisine-select {
+    width: 100%;
+    max-width: 280px;
+    padding: 0.5rem 2.5rem 0.65rem 0.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background-color: white;
+    color: #6f7175;
+    font-size: 0.9rem;
+    cursor: pointer;
+    outline: none;
+    appearance: auto;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .cuisine-select:hover {
+    border-color: #9ca3af;
+  }
+
+  .cuisine-select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  }
+
+  .cuisine-select option {
+    color: #111827;
+    background: white;
   }
 </style>

@@ -63,10 +63,15 @@ export namespace Components {
      */
     interface RecipeCard {
         /**
-          * Category / cuisine label
+          * Category label
           * @default ''
          */
         "category": string;
+        /**
+          * Cuisine label
+          * @default ''
+         */
+        "cuisine": string;
         /**
           * Whether this recipe is currently favorited
           * @default false
@@ -97,15 +102,23 @@ export namespace Components {
          */
         "categories": string[];
     }
-    /**
-     * Add/edit form for user-created recipes. Performs client-side validation
-     * (title required, at least one non-empty ingredient, instructions required)
-     * and only emits `save` once the data is valid.
-     */
     interface RecipeForm {
         /**
-          * Pass an existing recipe (as a JSON string or object) to edit it
+          * @default [   'American', 'British', 'Chinese', 'Croatian', 'Dutch', 'Egyptian',   'Filipino', 'French', 'Greek', 'Indian', 'Irish', 'Italian', 'Jamaican',   'Japanese', 'Kenyan', 'Malaysian', 'Mexican', 'Moroccan', 'Polish',   'Portuguese', 'Russian', 'Spanish', 'Thai', 'Tunisian', 'Turkish',   'Vietnamese', 'Other', ]
          */
+        "areas": string[];
+        /**
+          * @default [   'Beef', 'Breakfast', 'Chicken', 'Dessert', 'Goat', 'Lamb',   'Miscellaneous', 'Pasta', 'Pork', 'Seafood', 'Side', 'Starter',   'Vegan', 'Vegetarian', 'Other', ]
+         */
+        "categories": string[];
+        /**
+          * @default []
+         */
+        "extraAreas": string[];
+        /**
+          * @default []
+         */
+        "extraCategories": string[];
         "initialData": RecipeFormData | string;
     }
     /**
@@ -138,6 +151,10 @@ export namespace Components {
           * @default 'Search recipes...'
          */
         "placeholder": string;
+        /**
+          * @default true
+         */
+        "showSearchButton": boolean;
         /**
           * @default ''
          */
@@ -286,11 +303,6 @@ declare global {
         "save": RecipeFormData;
         "cancel": void;
     }
-    /**
-     * Add/edit form for user-created recipes. Performs client-side validation
-     * (title required, at least one non-empty ingredient, instructions required)
-     * and only emits `save` once the data is valid.
-     */
     interface HTMLRecipeFormElement extends Components.RecipeForm, HTMLStencilElement {
         addEventListener<K extends keyof HTMLRecipeFormElementEventMap>(type: K, listener: (this: HTMLRecipeFormElement, ev: RecipeFormCustomEvent<HTMLRecipeFormElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
@@ -415,10 +427,15 @@ declare namespace LocalJSX {
      */
     interface RecipeCard {
         /**
-          * Category / cuisine label
+          * Category label
           * @default ''
          */
         "category"?: string;
+        /**
+          * Cuisine label
+          * @default ''
+         */
+        "cuisine"?: string;
         /**
           * Whether this recipe is currently favorited
           * @default false
@@ -458,15 +475,23 @@ declare namespace LocalJSX {
         "categories"?: string[];
         "onFilterChange"?: (event: RecipeFilterBarCustomEvent<{ value: string }>) => void;
     }
-    /**
-     * Add/edit form for user-created recipes. Performs client-side validation
-     * (title required, at least one non-empty ingredient, instructions required)
-     * and only emits `save` once the data is valid.
-     */
     interface RecipeForm {
         /**
-          * Pass an existing recipe (as a JSON string or object) to edit it
+          * @default [   'American', 'British', 'Chinese', 'Croatian', 'Dutch', 'Egyptian',   'Filipino', 'French', 'Greek', 'Indian', 'Irish', 'Italian', 'Jamaican',   'Japanese', 'Kenyan', 'Malaysian', 'Mexican', 'Moroccan', 'Polish',   'Portuguese', 'Russian', 'Spanish', 'Thai', 'Tunisian', 'Turkish',   'Vietnamese', 'Other', ]
          */
+        "areas"?: string[];
+        /**
+          * @default [   'Beef', 'Breakfast', 'Chicken', 'Dessert', 'Goat', 'Lamb',   'Miscellaneous', 'Pasta', 'Pork', 'Seafood', 'Side', 'Starter',   'Vegan', 'Vegetarian', 'Other', ]
+         */
+        "categories"?: string[];
+        /**
+          * @default []
+         */
+        "extraAreas"?: string[];
+        /**
+          * @default []
+         */
+        "extraCategories"?: string[];
         "initialData"?: RecipeFormData | string;
         "onCancel"?: (event: RecipeFormCustomEvent<void>) => void;
         "onSave"?: (event: RecipeFormCustomEvent<RecipeFormData>) => void;
@@ -504,6 +529,10 @@ declare namespace LocalJSX {
          */
         "placeholder"?: string;
         /**
+          * @default true
+         */
+        "showSearchButton"?: boolean;
+        /**
           * @default ''
          */
         "value"?: string;
@@ -526,6 +555,7 @@ declare namespace LocalJSX {
         "recipeTitle": string;
         "image": string;
         "category": string;
+        "cuisine": string;
         "favorite": boolean;
     }
     interface RecipeFilterBarAttributes {
@@ -543,6 +573,7 @@ declare namespace LocalJSX {
         "placeholder": string;
         "value": string;
         "debounceMs": number;
+        "showSearchButton": boolean;
     }
 
     interface IntrinsicElements {
@@ -583,11 +614,6 @@ declare module "@stencil/core" {
              * Emits `filterChange` with the selected value ('' = all).
              */
             "recipe-filter-bar": LocalJSX.IntrinsicElements["recipe-filter-bar"] & JSXBase.HTMLAttributes<HTMLRecipeFilterBarElement>;
-            /**
-             * Add/edit form for user-created recipes. Performs client-side validation
-             * (title required, at least one non-empty ingredient, instructions required)
-             * and only emits `save` once the data is valid.
-             */
             "recipe-form": LocalJSX.IntrinsicElements["recipe-form"] & JSXBase.HTMLAttributes<HTMLRecipeFormElement>;
             /**
              * 5-star rating. Read-only display or interactive input.

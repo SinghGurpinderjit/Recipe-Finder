@@ -16,7 +16,8 @@ for extra buttons supplied by the consuming app.
 
 | Property      | Attribute      | Description                                                                                                                            | Type      | Default     |
 | ------------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------- | --------- | ----------- |
-| `category`    | `category`     | Category / cuisine label                                                                                                               | `string`  | `''`        |
+| `category`    | `category`     | Category label                                                                                                                         | `string`  | `''`        |
+| `cuisine`     | `cuisine`      | Cuisine label                                                                                                                          | `string`  | `''`        |
 | `favorite`    | `favorite`     | Whether this recipe is currently favorited                                                                                             | `boolean` | `false`     |
 | `image`       | `image`        | Image URL                                                                                                                              | `string`  | `undefined` |
 | `recipeTitle` | `recipe-title` | Recipe title (named recipeTitle, not title, to avoid colliding with the native HTML title/tooltip attribute every element already has) | `string`  | `undefined` |

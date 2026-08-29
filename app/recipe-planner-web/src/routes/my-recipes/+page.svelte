@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { goto } from '$app/navigation';
-  import { userRecipes } from '$lib/state/userRecipes.svelte';
-  import { favorites } from '$lib/state/favorites.svelte';
-  import { toasts } from '$lib/state/toast.svelte';
-  import type { Recipe } from '$lib/types';
+  import { goto } from "$app/navigation";
+  import { userRecipes } from "$lib/state/userRecipes.svelte";
+  import { favorites } from "$lib/state/favorites.svelte";
+  import { toasts } from "$lib/state/toast.svelte";
+  import type { Recipe } from "$lib/types";
 
   function openRecipe(id: string) {
     goto(`/recipe/${id}`);
@@ -12,8 +12,10 @@
   function onFavoriteToggle(recipe: Recipe) {
     favorites.toggle(recipe);
     toasts.show(
-      favorites.isFavorite(recipe.id) ? `Added "${recipe.title}" to favorites` : `Removed "${recipe.title}"`,
-      'success'
+      favorites.isFavorite(recipe.id)
+        ? `Added "${recipe.title}" to favorites`
+        : `Removed "${recipe.title}"`,
+      "success",
     );
   }
 
@@ -21,7 +23,7 @@
     e.stopPropagation();
     if (!confirm(`Delete "${recipe.title}" permanently?`)) return;
     userRecipes.remove(recipe.id);
-    toasts.show('Recipe deleted', 'info');
+    toasts.show("Recipe deleted", "info");
   }
 </script>
 
@@ -31,12 +33,14 @@
 
 <div class="page-header">
   <h1>My Recipes</h1>
-  <a class="btn" href="/recipes/new">+ New Recipe</a>
+  <a class="btn" href="/recipes/new">Add New Recipe</a>
 </div>
 
 {#if userRecipes.items.length === 0}
   <p class="empty-state">
-    You haven't created any recipes yet. <a href="/recipes/new">Create your first one</a>.
+    You haven't created any recipes yet. <a href="/recipes/new"
+      >Create your first one</a
+    >.
   </p>
 {:else}
   <div class="grid">
@@ -50,8 +54,14 @@
         onfavoriteToggle={() => onFavoriteToggle(r)}
       >
         <div slot="actions" class="card-actions">
-          <a class="mini-link" href={`/recipes/${r.id}/edit`} onclick={(e) => e.stopPropagation()}>Edit</a>
-          <button class="mini-link danger" onclick={(e) => deleteRecipe(r, e)}>Delete</button>
+          <a
+            class="mini-link"
+            href={`/recipes/${r.id}/edit`}
+            onclick={(e) => e.stopPropagation()}>Edit</a
+          >
+          <button class="mini-link danger" onclick={(e) => deleteRecipe(r, e)}
+            >Delete</button
+          >
         </div>
       </recipe-card>
     {/each}
@@ -64,6 +74,11 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 0.5rem;
+    
+    .btn {
+      background: rgb(255, 107, 53);
+      color: rgb(255, 255, 255);
+    }
   }
   .card-actions {
     display: flex;

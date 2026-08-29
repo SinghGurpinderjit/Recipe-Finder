@@ -5,17 +5,15 @@
 <!-- Auto Generated Below -->
 
 
-## Overview
-
-Add/edit form for user-created recipes. Performs client-side validation
-(title required, at least one non-empty ingredient, instructions required)
-and only emits `save` once the data is valid.
-
 ## Properties
 
-| Property      | Attribute      | Description                                                     | Type                       | Default     |
-| ------------- | -------------- | --------------------------------------------------------------- | -------------------------- | ----------- |
-| `initialData` | `initial-data` | Pass an existing recipe (as a JSON string or object) to edit it | `RecipeFormData \| string` | `undefined` |
+| Property          | Attribute      | Description | Type                       | Default                                                                                                                                                                                                                                                                                                                   |
+| ----------------- | -------------- | ----------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `areas`           | --             |             | `string[]`                 | `[   'American', 'British', 'Chinese', 'Croatian', 'Dutch', 'Egyptian',   'Filipino', 'French', 'Greek', 'Indian', 'Irish', 'Italian', 'Jamaican',   'Japanese', 'Kenyan', 'Malaysian', 'Mexican', 'Moroccan', 'Polish',   'Portuguese', 'Russian', 'Spanish', 'Thai', 'Tunisian', 'Turkish',   'Vietnamese', 'Other', ]` |
+| `categories`      | --             |             | `string[]`                 | `[   'Beef', 'Breakfast', 'Chicken', 'Dessert', 'Goat', 'Lamb',   'Miscellaneous', 'Pasta', 'Pork', 'Seafood', 'Side', 'Starter',   'Vegan', 'Vegetarian', 'Other', ]`                                                                                                                                                    |
+| `extraAreas`      | --             |             | `string[]`                 | `[]`                                                                                                                                                                                                                                                                                                                      |
+| `extraCategories` | --             |             | `string[]`                 | `[]`                                                                                                                                                                                                                                                                                                                      |
+| `initialData`     | `initial-data` |             | `RecipeFormData \| string` | `undefined`                                                                                                                                                                                                                                                                                                               |
 
 
 ## Events

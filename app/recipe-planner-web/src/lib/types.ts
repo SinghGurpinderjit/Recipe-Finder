@@ -3,31 +3,14 @@ export interface Recipe {
   title: string;
   image: string;
   category: string;
-  area?: string;
+  cuisine: string;
   ingredients: string[];
   instructions: string;
   source: 'api' | 'user' | 'seed';
 }
 
 export interface MealPlanEntry {
-  id: string; // recipe id
-  title: string;
-  image?: string;
-}
-
-export interface Recipe {
-  id: string;
-  title: string;
-  image: string;
-  category: string;
-  area?: string;
-  ingredients: string[];
-  instructions: string;
-  source: 'api' | 'user' | 'seed';
-}
-
-export interface MealPlanEntry {
-  id: string; // recipe id
+  recipeId: string; // recipe id
   title: string;
   image?: string;
 }

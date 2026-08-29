@@ -17,8 +17,10 @@ export class RecipeCard {
   @Prop() recipeTitle: string;
   /** Image URL */
   @Prop() image: string;
-  /** Category / cuisine label */
+  /** Category label */
   @Prop() category: string = '';
+  /** Cuisine label */
+  @Prop() cuisine: string = '';
   /** Whether this recipe is currently favorited */
   @Prop() favorite: boolean = false;
 
@@ -48,6 +50,7 @@ export class RecipeCard {
         <div class="body">
           <h3>{this.recipeTitle}</h3>
           {this.category && <span class="category">{this.category}</span>}
+          {this.cuisine && <span class="cuisine">{this.cuisine}</span>}
           <div class="actions">
             <slot name="actions"></slot>
           </div>

@@ -4,7 +4,7 @@ import type { Recipe } from '$lib/types';
 const STORAGE_KEY = 'recipe-finder:user-recipes';
 
 function makeId(): string {
-  return `user-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+  return `my-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 }
 
 const state = $state<{ items: Recipe[] }>({
@@ -19,6 +19,7 @@ export interface RecipeInput {
   id?: string;
   title: string;
   image: string;
+  cuisine: string;
   category: string;
   ingredients: string[];
   instructions: string;
@@ -48,7 +49,8 @@ export const userRecipes = {
       id: makeId(),
       title: input.title.trim(),
       image: input.image?.trim() || 'https://placehold.co/400x300?text=Recipe',
-      category: input.category?.trim() || 'Uncategorized',
+      category: input.category.trim(),
+      cuisine: input.cuisine.trim(),
       ingredients: input.ingredients.map((i) => i.trim()).filter(Boolean),
       instructions: input.instructions.trim(),
       source: 'user',
@@ -67,6 +69,7 @@ export const userRecipes = {
       title: input.title.trim(),
       image: input.image?.trim() || state.items[idx].image,
       category: input.category?.trim() || 'Uncategorized',
+      cuisine: input.cuisine.trim(),
       ingredients: input.ingredients.map((i) => i.trim()).filter(Boolean),
       instructions: input.instructions.trim(),
     };

@@ -12,11 +12,12 @@ after the user stops typing (default 350ms) or presses Enter.
 
 ## Properties
 
-| Property      | Attribute     | Description | Type     | Default               |
-| ------------- | ------------- | ----------- | -------- | --------------------- |
-| `debounceMs`  | `debounce-ms` |             | `number` | `350`                 |
-| `placeholder` | `placeholder` |             | `string` | `'Search recipes...'` |
-| `value`       | `value`       |             | `string` | `''`                  |
+| Property           | Attribute            | Description | Type      | Default               |
+| ------------------ | -------------------- | ----------- | --------- | --------------------- |
+| `debounceMs`       | `debounce-ms`        |             | `number`  | `350`                 |
+| `placeholder`      | `placeholder`        |             | `string`  | `'Search recipes...'` |
+| `showSearchButton` | `show-search-button` |             | `boolean` | `true`                |
+| `value`            | `value`              |             | `string`  | `''`                  |
 
 
 ## Events
