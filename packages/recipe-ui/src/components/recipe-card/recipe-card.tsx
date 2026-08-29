@@ -49,8 +49,10 @@ export class RecipeCard {
         </div>
         <div class="body">
           <h3>{this.recipeTitle}</h3>
-          {this.category && <span class="category">{this.category}</span>}
-          {this.cuisine && <span class="cuisine">{this.cuisine}</span>}
+          <span class="types">
+            {this.category && <span class="category">{this.category}</span>}
+            {this.cuisine && <span class="cuisine">{this.cuisine}</span>}
+          </span>
           <div class="actions">
             <slot name="actions"></slot>
           </div>
