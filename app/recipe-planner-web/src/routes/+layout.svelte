@@ -89,12 +89,6 @@
       color: rgb(255, 107, 53);
     }
   }
-  .brand-icon {
-    font-style: normal;
-    background: rgb(255, 107, 53);
-    font-size: 1.5rem;
-    border-radius: 8px;
-  }
   .nav nav a {
     color: #e5e7eb;
     text-decoration: none;
@@ -103,24 +97,6 @@
   }
   .nav nav a:hover {
     color: white;
-  }
-
-  .user-chip {
-    color: #e5e7eb;
-    margin-left: 1.25rem;
-    font-size: 0.9rem;
-  }
-  .logout-btn {
-    background: none;
-    border: 1px solid #4b5563;
-    color: #e5e7eb;
-    border-radius: 6px;
-    padding: 0.25rem 0.7rem;
-    margin-left: 0.6rem;
-    font-size: 0.85rem;
-  }
-  .logout-btn:hover {
-    background: #374151;
   }
   main {
     flex: 1;

@@ -104,6 +104,7 @@
         recipe-title={r.title}
         image={r.image}
         category={r.category}
+        cuisine={r.cuisine}
         favorite={favorites.isFavorite(r.id)}
         oncardClick={() => openRecipe(r.id)}
         onfavoriteToggle={() => onFavoriteToggle(r)}
