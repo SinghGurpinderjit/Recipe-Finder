@@ -2,18 +2,12 @@
   import { onMount } from "svelte";
   import { registerComponents } from "$lib/register-components";
   import { toasts } from "$lib/state/toast.svelte";
-  import { auth } from "$lib/state/auth.svelte";
-  import { page } from "$app/state";
   import { favorites } from "$lib/state/favorites.svelte";
   import { mealPlan } from "$lib/state/mealPlan.svelte";
   import "../app.css";
 
   let { children } = $props();
   let ready = $state(false);
-
-  const PUBLIC_ROUTES = ["/login", "/signup"];
-  let isPublicRoute = $derived(PUBLIC_ROUTES.includes(page.url.pathname));
-  let authorized = $derived(auth.isLoggedIn || isPublicRoute);
 
   const mealPlanCount = $derived(Object.values(mealPlan.plan).filter(
     (x) => x.Breakfast.length > 0 || x.Lunch.length > 0 || x.Dinner.length > 0
@@ -27,7 +21,8 @@
 
 <div class="app-shell">
   <header class="nav">
-    <a href="/" class="brand">🍲 Recipe Finder</a>
+    <a href="/" class="brand">
+      Recipe<span>Finder</span></a>
     <nav>
       <a href="/">Browse</a>
       <a href="/favorites" class="nav-link-badge">
@@ -43,7 +38,9 @@
         {/if}
       </a>
       <a href="/my-recipes">My Recipes</a>
-      <a href="/recipes/new">+ New Recipe</a>
+      <a href="/recipes/new">
+        <span class="new-recipe-icon">+</span> New Recipe
+      </a>
     </nav>
   </header>
 
@@ -84,7 +81,19 @@
     color: white;
     text-decoration: none;
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
+    align-items: center;
+    font-style: italic;
+    
+    span {
+      color: rgb(255, 107, 53);
+    }
+  }
+  .brand-icon {
+    font-style: normal;
+    background: rgb(255, 107, 53);
+    font-size: 1.5rem;
+    border-radius: 8px;
   }
   .nav nav a {
     color: #e5e7eb;

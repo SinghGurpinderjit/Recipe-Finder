@@ -21,6 +21,5 @@ export function saveJSON<T>(key: string, value: T): void {
   try {
     window.localStorage.setItem(key, JSON.stringify(value));
   } catch {
-    // storage full or disabled — fail silently for this assignment scope
   }
 }

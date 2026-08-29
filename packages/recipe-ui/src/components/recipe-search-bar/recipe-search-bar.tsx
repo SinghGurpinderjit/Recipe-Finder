@@ -13,6 +13,7 @@ export class RecipeSearchBar {
   @Prop() placeholder: string = 'Search recipes...';
   @Prop() value: string = '';
   @Prop() debounceMs: number = 350;
+  @Prop() showSearchButton: boolean = true;
 
   @State() internalValue: string = '';
 
@@ -54,9 +55,12 @@ export class RecipeSearchBar {
           onInput={this.onInput}
           onKeyDown={this.onKeyDown}
         />
-        <button onClick={() => this.search.emit({ value: this.internalValue })} aria-label="Search">
-          🔍
-        </button>
+        {
+          this.showSearchButton &&
+          <button onClick={() => this.search.emit({ value: this.internalValue })} aria-label="Search">
+            🔍
+          </button>
+        }
       </div>
     );
   }

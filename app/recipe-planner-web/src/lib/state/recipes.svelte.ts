@@ -25,4 +25,42 @@ export const recipes = {
         if (!category) return this.items;
         return this.items.filter((r) => r.category === category);
     },
+    filterByCuisine(cuisine: string): Recipe[] {
+        const q = cuisine.trim().toLowerCase();
+
+        if (!q) return this.items;
+
+        return this.items.filter((r) =>
+            r.cuisine?.toLowerCase().includes(q)
+        );
+    },
+    filter(
+        query: string,
+        category: string,
+        cuisine: string
+    ): Recipe[] {
+        const searchQuery = query.trim().toLowerCase();
+        const cuisineQuery = cuisine.trim().toLowerCase();
+        const categoryQuery = category.trim().toLowerCase();
+
+        return this.items.filter((r) => {
+            const matchesQuery =
+                !searchQuery ||
+                r.title.toLowerCase().includes(searchQuery);
+
+            const matchesCategory =
+                !categoryQuery ||
+                r.category?.toLowerCase() === categoryQuery;
+
+            const matchesCuisine =
+                !cuisineQuery ||
+                r.cuisine?.toLowerCase().includes(cuisineQuery);
+
+            return (
+                matchesQuery &&
+                matchesCategory &&
+                matchesCuisine
+            );
+        });
+    }
 };

@@ -10,7 +10,7 @@ export const seedRecipes: Recipe[] = [
     title: 'Spaghetti Carbonara',
     image: 'https://www.themealdb.com/images/media/meals/llcbn01574260722.jpg',
     category: 'Pasta',
-    area: 'Italian',
+    cuisine: 'Italian',
     ingredients: [
       '200g spaghetti',
       '100g pancetta',
@@ -29,7 +29,7 @@ export const seedRecipes: Recipe[] = [
     title: 'Chicken Tikka Masala',
     image: 'https://www.themealdb.com/images/media/meals/wyxwsp1486979827.jpg',
     category: 'Chicken',
-    area: 'Indian',
+    cuisine: 'Indian',
     ingredients: [
       '500g chicken breast, cubed',
       '200g yogurt',
@@ -48,7 +48,7 @@ export const seedRecipes: Recipe[] = [
     title: 'Classic Beef Tacos',
     image: 'https://www.sargento.com/assets/Uploads/Recipe/Image/BeefTaco__FocusFillWyIwLjAwIiwiMC4wMCIsODAwLDQ3OF0_CompressedW10.jpg',
     category: 'Beef',
-    area: 'Mexican',
+    cuisine: 'Mexican',
     ingredients: [
       '500g ground beef',
       '8 taco shells',
@@ -67,7 +67,7 @@ export const seedRecipes: Recipe[] = [
     title: 'Margherita Pizza',
     image: 'https://www.themealdb.com/images/media/meals/x0lk931587671540.jpg',
     category: 'Vegetarian',
-    area: 'Italian',
+    cuisine: 'Italian',
     ingredients: [
       '1 pizza dough base',
       '100ml tomato sauce',
@@ -85,7 +85,7 @@ export const seedRecipes: Recipe[] = [
     title: 'Pad Thai',
     image: 'https://www.recipetineats.com/tachyon/2018/05/Chicken-Pad-Thai_9.jpg?resize=900%2C1260&zoom=0.72',
     category: 'Noodles',
-    area: 'Thai',
+    cuisine: 'Thai',
     ingredients: [
       '200g rice noodles',
       '200g shrimp or tofu',
@@ -106,7 +106,7 @@ export const seedRecipes: Recipe[] = [
     title: 'Chocolate Lava Cake',
     image: 'https://images.unsplash.com/photo-1585504455924-3d3b0eb2b8ee?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     category: 'Dessert',
-    area: 'French',
+    cuisine: 'French',
     ingredients: [
       '100g dark chocolate',
       '100g butter',
@@ -124,7 +124,7 @@ export const seedRecipes: Recipe[] = [
     title: 'Greek Salad',
     image: 'https://www.themealdb.com/images/media/meals/wxywrq1468235067.jpg',
     category: 'Salad',
-    area: 'Greek',
+    cuisine: 'Greek',
     ingredients: [
       '3 tomatoes, chopped',
       '1 cucumber, sliced',
@@ -143,7 +143,7 @@ export const seedRecipes: Recipe[] = [
     title: 'Vegetable Fried Rice',
     image: 'https://www.themealdb.com/images/media/meals/1529444830.jpg',
     category: 'Vegetarian',
-    area: 'Chinese',
+    cuisine: 'Chinese',
     ingredients: [
       '3 cups cooked, cooled rice',
       '2 eggs',

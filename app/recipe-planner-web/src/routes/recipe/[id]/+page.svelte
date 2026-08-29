@@ -28,10 +28,12 @@
     const found = recipes.getById(recipeId);
     if (found) {
       recipe = found;
+      
     } else {
       recipe = null;
       notFound = true;
     }
+
     loading = false;
   }
 
@@ -60,7 +62,7 @@
   function addToPlan() {
     if (!recipe) return;
     mealPlan.assign(selectedDay, selectedMealTime, {
-      id: recipe.id,
+      recipeId: recipe.id,
       title: recipe.title,
       image: recipe.image,
     });
@@ -74,7 +76,9 @@
   function deleteRecipe() {
     if (!recipe || recipe.source !== "user") return;
     if (!confirm("Delete this recipe permanently?")) return;
-    userRecipes.remove(recipe.id);
+    // userRecipes.remove(recipe.id);
+    // favorites.remove(recipe.id);
+    mealPlan.removeByRecipeId(recipe.id);
     toasts.show("Recipe deleted", "info");
     goto("/");
   }
@@ -116,7 +120,7 @@
       <h1>{recipe.title}</h1>
       <div class="badges">
         {#if recipe.category}<span class="badge">{recipe.category}</span>{/if}
-        {#if recipe.area}<span class="badge">{recipe.area}</span>{/if}
+        {#if recipe.cuisine}<span class="badge">{recipe.cuisine}</span>{/if}
         {#if recipe.source === "user"}<span class="badge user">My Recipe</span
           >{/if}
       </div>

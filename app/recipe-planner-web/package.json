@@ -18,7 +18,7 @@
     "vite": "^5.4.0"
   },
   "dependencies": {
-    "@gurpinderjitsingh/recipe-ui": "^0.2.1"
+    "@gurpinderjitsingh/recipe-ui": "^0.8.0"
   },
   "exports": {
     ".": {

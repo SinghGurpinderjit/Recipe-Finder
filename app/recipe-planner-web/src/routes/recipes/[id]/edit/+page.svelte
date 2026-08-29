@@ -4,13 +4,20 @@
   import { userRecipes, type RecipeInput } from "$lib/state/userRecipes.svelte";
   import { toasts } from "$lib/state/toast.svelte";
   import { recipes } from "$lib/state/recipes.svelte";
-
+  import { customAreas } from '$lib/state/customAreas.svelte';
+  import { customCategories } from '$lib/state/customCategories.svelte';
+  import { DEFAULT_AREAS } from '$lib/data/default-areas';
+  
   let id = $derived(page.params.id);
   let recipe = $derived(recipes.getById(id ?? ""));
 
+  $inspect(recipe);
   
   function onSave(e: CustomEvent<RecipeInput>) {
     try {
+      if (e.detail.cuisine && !DEFAULT_AREAS.includes(e.detail.cuisine)) {
+        customAreas.add(e.detail.cuisine);
+      }
       userRecipes.update(id ?? "", e.detail);
       toasts.show("Recipe updated!", "success");
       goto(`/recipe/${id}`);
@@ -35,7 +42,7 @@
   </p>
 {:else}
   <h1>Edit Recipe</h1>
-  <recipe-form initialData={recipe} onsave={onSave} oncancel={onCancel}>
+  <recipe-form initialData={recipe} extraCategories={customCategories.items} extraAreas={customAreas.items} onsave={onSave} oncancel={onCancel}>    
     <h3 slot="header">Update Details</h3>
   </recipe-form>
 {/if}

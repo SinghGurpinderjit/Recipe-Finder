@@ -49,6 +49,18 @@ export const mealPlan = {
     };
     persist();
   },
+  removeByRecipeId(recipeId: string) {
+    state.plan = Object.fromEntries(
+      Object.entries(state.plan).map(([day, meals]) => [
+        day,
+        {
+          Breakfast: meals.Breakfast.filter(x => x.id !== recipeId),
+          Lunch: meals.Lunch.filter(x => x.id !== recipeId),
+          Dinner: meals.Dinner.filter(x => x.id !== recipeId)
+        }
+      ])
+    );
+  },
   remove(day: string, mealTime: MealTime, mealId: string) {
     const dayPlan = state.plan[day] ?? emptyDayPlan();
     const current = dayPlan[mealTime] ?? [];
