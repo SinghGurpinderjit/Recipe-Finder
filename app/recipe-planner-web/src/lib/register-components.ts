@@ -4,5 +4,4 @@
 // inside onMount.
 export async function registerComponents() {
   await import('@gurpinderjitsingh/recipe-ui/dist/components');
-  // await defineCustomElements();
 }

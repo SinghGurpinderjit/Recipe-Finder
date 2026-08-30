@@ -1,7 +1,7 @@
 import { Component, Prop, Event, EventEmitter, h } from '@stencil/core';
 
 export interface PlannedMeal {
-  id: string;
+  recipeId: string;
   title: string;
   image?: string;
 }
@@ -37,7 +37,7 @@ export class MealPlanDay {
               <span class="title">{m.title}</span>
               <button
                 class="remove-btn"
-                onClick={() => this.removeMeal.emit({ day: this.day, mealId: m.id })}
+                onClick={() => this.removeMeal.emit({ day: this.day, mealId: m.recipeId })}
                 aria-label={`Remove ${m.title}`}
               >
                 ✕

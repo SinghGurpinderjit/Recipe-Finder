@@ -77,7 +77,7 @@
     margin-bottom: 0.5rem;
 
     .btn {
-      background: rgb(255, 107, 53);
+      background: rgb(235, 98, 48);
       color: rgb(255, 255, 255);
     }
   }
@@ -87,10 +87,11 @@
   }
   .mini-link {
     font-size: 0.75rem;
-    color: #2563eb;
-    background: none;
+    color: white;
+    background: #2563eb;
     border: none;
-    padding: 0;
+    border-radius: 15px;
+    padding: 5px 15px;
     cursor: pointer;
     text-decoration: none;
   }
@@ -98,6 +99,7 @@
     text-decoration: underline;
   }
   .mini-link.danger {
-    color: #dc2626;
+    background-color: #dc2626;
+    color: white;
   }
 </style>

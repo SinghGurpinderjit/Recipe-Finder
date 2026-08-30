@@ -2,11 +2,11 @@
   import { page } from "$app/state";
   import { goto } from "$app/navigation";
   import { onMount } from "svelte";
-  import { recipes } from "$lib/state/recipes.svelte";
   import { favorites } from "$lib/state/favorites.svelte";
   import { userRecipes } from "$lib/state/userRecipes.svelte";
   import { mealPlan } from "$lib/state/mealPlan.svelte";
   import { toasts } from "$lib/state/toast.svelte";
+  import { fetchRecipeById } from "$lib/data/recipeSource";
   import {
     WEEK_DAYS,
     MEAL_TIMES,
@@ -22,18 +22,29 @@
   let selectedDay = $state<string>(WEEK_DAYS[0]);
   let selectedMealTime = $state<MealTime>("Breakfast");
 
-  function load(recipeId: string) {
+  async function load(recipeId: string) {
     loading = true;
     notFound = false;
-    const found = recipes.getById(recipeId);
-    if (found) {
-      recipe = found;
-      
-    } else {
-      recipe = null;
-      notFound = true;
+    recipe = null;
+
+    // User-created recipes only ever live in localStorage, never the API.
+    const userRecipe = userRecipes.getById(recipeId);
+    if (userRecipe) {
+      recipe = userRecipe;
+      loading = false;
+      return;
     }
 
+    // Otherwise it's an API recipe — always fetch full detail directly
+    // (ingredients/instructions aren't in the browse-grid summary), so
+    // this works even on a direct link before the catalog has loaded.
+    try {
+      const detail = await fetchRecipeById(recipeId);
+      recipe = detail ?? null;
+      notFound = !detail;
+    } catch {
+      notFound = true;
+    }
     loading = false;
   }
 
@@ -76,8 +87,8 @@
   function deleteRecipe() {
     if (!recipe || recipe.source !== "user") return;
     if (!confirm("Delete this recipe permanently?")) return;
-    // userRecipes.remove(recipe.id);
-    // favorites.remove(recipe.id);
+    userRecipes.remove(recipe.id);
+    favorites.remove(recipe.id);
     mealPlan.removeByRecipeId(recipe.id);
     toasts.show("Recipe deleted", "info");
     goto("/");
@@ -112,7 +123,15 @@
 {:else if notFound}
   <p class="empty-state">Recipe not found.</p>
 {:else if recipe}
-  <a href="/" class="back-link">&larr; Back to browse</a>
+  {#if recipe.source == "user"}
+    <a href="/my-recipes" class="back-link">
+      &larr;<span>Back to My Recipes</span>
+    </a>
+  {:else if recipe.source == "api"}
+    <a href="/" class="back-link">
+      &larr;<span>Back to Browse</span>
+    </a>
+  {/if}
 
   <div class="detail">
     <img src={recipe.image} alt={recipe.title} class="hero" />
@@ -141,7 +160,7 @@
       </div>
 
       <h2>Ingredients</h2>
-      {#if recipe.ingredients.length}
+      {#if recipe.ingredients?.length}
         <ul class="ingredients">
           {#each recipe.ingredients as ing}
             <li>{ing}</li>
@@ -194,7 +213,7 @@
 
     <div class="modal-footer">
       <button class="btn secondary" use:onNativeClick={() => (showPlanModal = false)}
-        >Cancel</button
+      >Cancel</button
       >
       <button class="btn" use:onNativeClick={addToPlan}>Add to plan</button>
     </div>
@@ -205,7 +224,7 @@
   .back-link {
     display: inline-block;
     margin-bottom: 1rem;
-    color: #2563eb;
+    color: rgb(235, 98, 48);
     text-decoration: none;
   }
   .detail {
@@ -285,9 +304,9 @@
     background: #f3f4f6;
   }
   .meal-toggle.active {
-    border-color: #2563eb;
+    border-color: rgb(235, 98, 48);
     background: #eff6ff;
-    color: #2563eb;
+    color: rgb(235, 98, 48);
     font-weight: 600;
   }
   .modal-footer {

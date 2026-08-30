@@ -60,7 +60,7 @@
     "Thursday",
     "Friday",
     "Saturday",
-  ]; // matches Date#getDay()
+  ]; 
   const today = new Date();
   const todayLabel = JS_DAY_TO_INDEX[today.getDay()];
   const todayIndexInWeek = (today.getDay() + 6) % 7; // convert to Mon=0..Sun=6, matching WEEK_DAYS order
@@ -147,6 +147,7 @@
   <recipe-search-bar
     placeholder="Search by Recipe Name"
     value={query}
+    showSearchButton={false}
     onsearch={(e: CustomEvent<{ value: string }>) => {
       query = e.detail.value;
     }}
@@ -280,36 +281,5 @@
     .week {
       grid-template-columns: auto auto;
     }
-  }
-
-  .cuisine-select {
-    width: 100%;
-    max-width: 280px;
-    padding: 0.5rem 2.5rem 0.65rem 0.5rem;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    background-color: white;
-    color: #6f7175;
-    font-size: 0.9rem;
-    cursor: pointer;
-    outline: none;
-    appearance: auto;
-    transition:
-      border-color 0.2s ease,
-      box-shadow 0.2s ease;
-  }
-
-  .cuisine-select:hover {
-    border-color: #9ca3af;
-  }
-
-  .cuisine-select:focus {
-    border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-  }
-
-  .cuisine-select option {
-    color: #111827;
-    background: white;
   }
 </style>

@@ -6,7 +6,6 @@
   import { recipes } from "$lib/state/recipes.svelte";
   import { customAreas } from '$lib/state/customAreas.svelte';
   import { customCategories } from '$lib/state/customCategories.svelte';
-  import { DEFAULT_AREAS } from '$lib/data/default-areas';
   
   let id = $derived(page.params.id);
   let recipe = $derived(recipes.getById(id ?? ""));
@@ -15,7 +14,7 @@
   
   function onSave(e: CustomEvent<RecipeInput>) {
     try {
-      if (e.detail.cuisine && !DEFAULT_AREAS.includes(e.detail.cuisine)) {
+      if (e.detail.cuisine && !recipes.cuisines.includes(e.detail.cuisine)) {
         customAreas.add(e.detail.cuisine);
       }
       userRecipes.update(id ?? "", e.detail);
