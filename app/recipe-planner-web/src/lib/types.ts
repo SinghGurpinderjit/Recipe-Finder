@@ -2,15 +2,15 @@ export interface Recipe {
   id: string;
   title: string;
   image: string;
-  category: string;
-  cuisine: string;
-  ingredients: string[];
-  instructions: string;
-  source: 'api' | 'user' | 'seed';
+  category?: string;
+  cuisine?: string;
+  ingredients?: string[];
+  instructions?: string;
+  source: 'api' | 'user';
 }
 
 export interface MealPlanEntry {
-  recipeId: string; // recipe id
+  recipeId: string;
   title: string;
   image?: string;
 }

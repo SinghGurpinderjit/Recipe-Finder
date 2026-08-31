@@ -38,8 +38,8 @@
   <header class="nav">
     <div class="nav-top">
       <a href="/" class="brand" onclick={closeMenu}>
-        Recipe<span>Finder</span></a
-      >
+        Recipe<span>Finder</span> <span>Plan your week</span>
+      </a>
 
       <button
         class="hamburger"
@@ -107,6 +107,9 @@
     display: flex;
     justify-content: space-between;
     align-content: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
   }
 
   .nav-top {
@@ -125,8 +128,13 @@
     align-items: center;
     font-style: italic;
 
-    span {
-      color: rgb(255, 107, 53);
+    span:first-child {
+      color: rgb(235, 98, 48);
+    }
+    span:last-child {
+      font-size: 11px;
+      font-style: normal;
+      text-wrap: nowrap;
     }
   }
   /* Hamburger button — hidden on desktop, shown on mobile via media query below */
@@ -167,6 +175,7 @@
   }
   .nav-links a {
     margin-left: 1.25rem;
+    text-wrap: nowrap;
   }
   .nav-links a:first-child {
     margin-left: 0;
@@ -185,7 +194,7 @@
     gap: 0.35rem;
   }
   .badge-count {
-    background: #ef4444;
+    background: #ffffff;
     color: white;
     font-size: 0.7rem;
     font-weight: 700;
@@ -256,8 +265,17 @@
   .new-recipe-link {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
     white-space: nowrap;
+    background-color: rgb(199 91 51);
+    border-radius: 15px;
+    padding: 3px 9px 3px 0;
+
+    span:nth-child(1) {
+      padding: 0px 9px 0px 15px;
+    }
+    span:nth-child(2) {
+      padding: 0px 9px 0px 0px;
+    }
   }
   .new-recipe-icon {
     display: inline-flex;
@@ -265,12 +283,10 @@
     justify-content: center;
     width: 1.15rem;
     height: 1.15rem;
-    line-height: 1;
     font-weight: 700;
-    font-size: 0.85rem;
+    font-size: 1rem;
     border-radius: 999px;
-    background: rgba(255, 107, 53, 0.18);
-    color: rgb(255, 107, 53);
+    color: white;
     flex-shrink: 0;
   }
 </style>

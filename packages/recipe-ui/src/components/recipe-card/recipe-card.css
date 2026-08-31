@@ -1,5 +1,5 @@
 :host {
-  display: block;
+  display: grid;
   font-family: system-ui, sans-serif;
 }
 
@@ -51,7 +51,7 @@
 }
 
 .fav-btn.active {
-  color: rgb(255, 107, 53);
+  color:rgb(235, 98, 48);
 }
 
 .body {
@@ -77,8 +77,8 @@ h3 {
   text-transform: uppercase;
   letter-spacing: 0.03em;
   border: 1px solid;
-  border-color: rgb(255, 107, 53);
-  color: rgb(255, 107, 53);
+  border-color: rgb(235, 98, 48);
+  color: rgb(235, 98, 48);
   font-weight: 500;
   border-radius: 15px;
   padding: 3px 8px;
