@@ -12,6 +12,12 @@ consuming a reusable **StencilJS** web component library published to npm.
 | npm package  | `https://www.npmjs.com/package/@gurpinderjitsingh/recipe-ui` |
 | GitHub repo  | `https://github.com/SinghGurpinderjit/Recipe-Finder`         |
 
+• Source code for the SvelteKit application.
+    https://github.com/SinghGurpinderjit/Recipe-Finder/tree/master/app/recipe-planner-web
+
+• Source code for the StencilJS component library.
+    https://github.com/SinghGurpinderjit/Recipe-Finder/tree/master/packages/recipe-ui
+
 ## Setup instructions ### 
 
 ### 1. Component library (`packages/recipe-ui`) ### 
